@@ -1,0 +1,5 @@
+public/
+yarn-error.log
+node_modules/
+.DS_Store
+mix-manifest.json
