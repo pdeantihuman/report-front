@@ -15,7 +15,9 @@
     import from './Card/Primary'
     export default {
         data() {
-            return {}
+            return {
+                done: false
+            }
         },
         components: {
             'primary' : Primary
@@ -28,6 +30,9 @@
             completed: String,
             next_id: String
         },
+        computed: {
+
+        }
     }
 </script>
 
