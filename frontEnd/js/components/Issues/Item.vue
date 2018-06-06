@@ -9,7 +9,6 @@
             </div>
             <b-btn
                     class="mt-3"
-                    variant="outline-primary"
                     block @click="hideModal()"
                     v-bind:class="[isUploading?dangerBtn:primaryBtn ]"
                     v-bind:disabled="isUploading">
