@@ -1,9 +1,10 @@
 <template>
     <b-btn
             class="mt-3"
-            block @click="submit()"
-            v-bind:class="buttonClass"
-            v-bind:disabled="isUploading">
+            block 
+            @click="submit()"
+            :class="buttonClass"
+            :disabled="isUploading">
         {{ btnMsg }}
     </b-btn>
 </template>
@@ -42,21 +43,25 @@
         },
         methods: {
             submit() {
-                this.isUploading = true;
-                if (this.canUndo) {
-                    axios.patch(this.undoUrl)
+                this.isUploading = true
+                this.canUndo? this.undo(): this.do()
+            },
+            undo() {
+                axios.patch(this.undoUrl)
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = false
                         })
-                } else {
-                    axios.patch(this.patchUrl)
+            },
+            do() {
+                axios.patch(this.patchUrl)
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = true
                         })
-                }
             }
+
+
         }
     }
 </script>
