@@ -2,8 +2,8 @@
     <b-btn
             class="mt-3"
             block 
+            :variant="variant"
             @click="submit()"
-            :class="buttonClass"
             :disabled="isUploading">
         {{ btnMsg }}
     </b-btn>
@@ -31,7 +31,7 @@
             disabled() {
                 return this.isUploading || (!this.canUndo)
             },
-            buttonClass() {
+            variant() {
                 return this.canUndo ? "outline-danger" : "outline-primary"
             },
             btnMsg() {
