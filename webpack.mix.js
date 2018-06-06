@@ -11,6 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('frontEnd/js/index/index.js', 'public/js')
-   .sass('frontEnd/css/app.scss', 'public/css')
+// mix.js('frontEnd/js/index/index.js', 'public/js')
+//    .sass('frontEnd/css/app.scss', 'public/css')
+// ;
+mix.js('frontEnd/js/show/show.js', 'public/js')
+   // .sass('frontEnd/css/app.scss', 'public/css')
 ;
