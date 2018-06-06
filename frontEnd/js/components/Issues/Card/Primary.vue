@@ -35,11 +35,11 @@
                 return this.canUndo ? "outline-danger" : "outline-primary"
             },
             btnMsg() {
-                return isUploading ? "请求上传中" : this.btnState
+                return this.isUploading ? "请求上传中" : this.btnState
             },
             btnState() {
-                return canUndo? "撤销":"已解决 #"+this.issue_id,
-            }
+                return this.canUndo? "撤销":"已解决 #"+this.issue_id
+            },
 
         },
         methods: {

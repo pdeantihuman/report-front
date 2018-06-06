@@ -16,8 +16,8 @@
 </template>
 
 <script>
-    import from './Primary'
-    import from './Secondary'
+    import Primary from './Primary'
+    import Secondary from './Secondary'
     export default {
         data() {
             return {
