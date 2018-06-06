@@ -10,7 +10,7 @@
             <h5> {{ description }} </h5>
         </div>
         <primary :issue_id="issue_id"></primary>
-        <secondary :is_grey="done" :issue_id="next_id"></secondary>
+        <secondary :is_grey="completed" :issue_id="next_id"></secondary>
     </p>
   </b-card>
 </template>
@@ -35,15 +35,14 @@
             header_text() {
                 return this.done?"white":"black"
             }            
-        },
+        }, 
         props: {
             issue_id: String,
             location: String,
             description: String,
             datetime: String,
             completed: String, // 子组件
-            next_id: String, // 子组件
-            completed: String // 子组件
+            next_id: String, // 子组件 TODO: 可能需要根据情况隐藏 next_button
         },
         methods: {
         }
