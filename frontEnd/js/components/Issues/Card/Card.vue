@@ -3,15 +3,14 @@
           :header-text-variant="header_text"
           :header-bg-variant="header_bg"
           header-tag="header"
-          :title="location"
-  >
+          :title="location">
     <p class="card-text">
-            <div>
-                <h6> {{ datetime }} </h6>
-                <h5> {{ description }} </h5>
-            </div>
-            <primary :issue_id="issue_id"></primary>
-            <secondary :is_grey="done" :issue_id="next_id"></secondary>
+        <div>
+            <h6> {{ datetime }} </h6>
+            <h5> {{ description }} </h5>
+        </div>
+        <primary :issue_id="issue_id"></primary>
+        <secondary :is_grey="done" :issue_id="next_id"></secondary>
     </p>
   </b-card>
 </template>
