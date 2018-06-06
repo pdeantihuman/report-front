@@ -11,12 +11,11 @@
 <script>
     export default {
         props: {
-            issues_id: String,
+            issue_id: String,
         },
         data() {
             return {
                 isUploading: false,
-                btnMsg: "已解决 #"+this.issues_id,
                 canUndo: false
             }
         },
@@ -28,16 +27,22 @@
                 return '/issues/' + this.issues_id + '/undo';
             },
             disabled() {
-                return this.isUploading || (!( this.is_open == 1) && !this.canUndo)
+                return this.isUploading || (!this.canUndo)
             },
             buttonClass() {
                 return this.canUndo ? "outline-danger" : "outline-primary"
+            },
+            btnMsg() {
+                return isUploading ? "请求上传中" : this.btnState
+            },
+            btnState() {
+                return canUndo? "撤销":"已解决 #"+this.issue_id,
             }
+
         },
         methods: {
             submit() {
                 this.isUploading = true;
-                this.btnMsg = "请求上传中……"
                 if (this.canUndo) {
                     axios.patch(this.undoUrl)
                         .then(response => {
