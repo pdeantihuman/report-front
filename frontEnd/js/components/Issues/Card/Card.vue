@@ -9,7 +9,7 @@
             <h6> {{ datetime }} </h6>
             <h5> {{ description }} </h5>
         </div>
-        <primary :issue_id="issue_id" @do="done=true" @undo="done=false"></primary>
+        <primary :issue_id="issue_id" @do="done = true" @undo="done = false"></primary>
         <secondary :is_grey="is_grey" :issue_id="next_id"></secondary>
     </p>
   </b-card>

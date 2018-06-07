@@ -51,7 +51,7 @@
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = false
-                            $emit('undo');
+                            this.$emit('undo');
                         })
             },
             do() {
@@ -59,7 +59,7 @@
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = true
-                            $emit('do')
+                            this.$emit('do')
                         })
             }
 
