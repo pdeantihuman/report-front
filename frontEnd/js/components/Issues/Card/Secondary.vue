@@ -21,7 +21,7 @@
                 return this.is_grey?"outline-secondary":"outline-danger"
             },
             href() {
-                return '/issues/'.$this.issue_id
+                return '/issues/' + this.issue_id
             }
         },
         props: {
