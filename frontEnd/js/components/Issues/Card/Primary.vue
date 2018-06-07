@@ -13,7 +13,6 @@
     export default {
         props: {
             issue_id: String,
-            done: Boolean,
         },
         data() {
             return {
@@ -52,7 +51,7 @@
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = false
-                            this.done = false
+                            $emit('undo');
                         })
             },
             do() {
@@ -60,7 +59,7 @@
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = true
-                            this.done = true
+                            $emit('do')
                         })
             }
 
