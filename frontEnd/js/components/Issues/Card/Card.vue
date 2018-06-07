@@ -10,7 +10,7 @@
             <h5> {{ description }} </h5>
         </div>
         <primary :issue_id="issue_id"></primary>
-        <secondary :is_grey="completed" :issue_id="next_id"></secondary>
+        <secondary :is_grey="is_grey" :issue_id="next_id"></secondary>
     </p>
   </b-card>
 </template>
@@ -34,7 +34,10 @@
             },
             header_text() {
                 return this.done?"white":"black"
-            }            
+            },
+            is_grey(){
+                return this.completed == 1
+            }
         }, 
         props: {
             issue_id: String,

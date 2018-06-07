@@ -2,6 +2,7 @@
     <b-btn
             class="mt-3"
             block
+            v-if="issue_id != 0"
             :variant="variant"
             :href="href"
             >

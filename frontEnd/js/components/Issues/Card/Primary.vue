@@ -23,10 +23,10 @@
         },
         computed: {
             patchUrl() {
-                return '/issues/' + this.issues_id;
+                return '/issues/' + this.issue_id;
             },
             undoUrl() {
-                return '/issues/' + this.issues_id + '/undo';
+                return '/issues/' + this.issue_id + '/undo';
             },
             disabled() {
                 return this.isUploading || (!this.canUndo)
