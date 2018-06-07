@@ -4,7 +4,7 @@
             block 
             :variant="variant"
             @click="submit()"
-            :disabled="isUploading">
+            :disabled="isUploading || disabled">
         {{ btnMsg }}
     </b-btn>
 </template>
@@ -13,6 +13,7 @@
     export default {
         props: {
             issue_id: String,
+            disabled: Boolean
         },
         data() {
             return {
@@ -26,9 +27,6 @@
             },
             undoUrl() {
                 return '/issues/' + this.issue_id + '/undo';
-            },
-            disabled() {
-                return this.isUploading || (!this.canUndo)
             },
             variant() {
                 return this.canUndo ? "outline-danger" : "outline-primary"

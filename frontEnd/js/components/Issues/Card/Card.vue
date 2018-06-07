@@ -9,7 +9,7 @@
             <h6> {{ datetime }} </h6>
             <h5> {{ description }} </h5>
         </div>
-        <primary :issue_id="issue_id" @do="done = true" @undo="done = false"></primary>
+        <primary :issue_id="issue_id" @do="done = true" @undo="done = false" :disabled="is_open != 1"></primary>
         <secondary :is_grey="is_grey" :issue_id="next_id"></secondary>
     </p>
   </b-card>
@@ -44,6 +44,7 @@
             location: String,
             description: String,
             datetime: String,
+            is_open: String,
             completed: String, // 子组件
             next_id: String, // 子组件 TODO: 可能需要根据情况隐藏 next_button
         },
