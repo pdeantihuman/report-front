@@ -48,7 +48,7 @@
                 this.canUndo? this.undo(): this.do()
             },
             undo() {
-                axios.patch(this.undoUrl)
+                axios.post(this.undoUrl)
                         .then(response => {
                             this.isUploading = false
                             this.canUndo = false
