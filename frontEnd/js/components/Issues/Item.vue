@@ -61,6 +61,11 @@
                 return this.canUndo?"撤销":"解决"
             }
         },
+        mounted(){
+            setInterval(() => {
+                location.reload()
+            }, 60000)
+        },
         props: {
             issues_id: String,
             location: String,
