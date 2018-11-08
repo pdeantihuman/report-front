@@ -16,6 +16,7 @@ mix.sass('frontEnd/css/app.scss', 'public/css');
 mix.js('frontEnd/js/show/show.js', 'public/js')
 //     .sass('frontEnd/css/app.scss', 'public/css');
 mix.js('frontEnd/js/app/app.js', 'public/js');
+mix.js('frontEnd/js/configuration/configuration.js', 'public/js')
 mix.browserSync({
     proxy: 'report',
     serveStatic: [{
