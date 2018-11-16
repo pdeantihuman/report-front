@@ -31,6 +31,7 @@
     import bModal from 'bootstrap-vue/es/components/modal/modal'
     import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
     export default {
+        name: 'issueItem',
         data() {
             return {
                 isUploading: false,
@@ -62,12 +63,10 @@
             }
         },
         mounted(){
-            setInterval(() => {
-                location.reload()
-            }, 60000)
+
         },
         props: {
-            issues_id: String,
+            issues_id: Number,
             location: String,
             description: String,
             datetime:String,
@@ -81,6 +80,7 @@
         },
         methods: {
             showModal() {
+                clearInterval()
                 if (this.canUndo){
                     axios.post(this.undoUrl)
                         .then(response => {
@@ -93,6 +93,9 @@
                 }
             },
             hideModal() {
+                setInterval(() => {
+                    location.reload()
+                }, 60000)
                 axios.patch(this.patchUrl)
                     .then(response => {
                         this.isUploading = false
