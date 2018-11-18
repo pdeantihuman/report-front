@@ -4,8 +4,8 @@
             {{ itemKey + ' : ' + itemValue }}
         </span>
         <div class="col-4 px-0" v-else><input type="text" class="form-control" :placeholder="itemValue" v-model="input"></div>
-        <button class="btn btn-warning btn-sm" @click="edit" v-if="!editing && !processing">Edit</button>
-        <button class="btn btn-warning btn-sm" @click="update" v-if="editing && !processing">Update</button>
+        <button class="btn btn-warning btn-sm" @click="edit" v-if="!editing && !processing">编辑</button>
+        <button class="btn btn-warning btn-sm" @click="update" v-if="editing && !processing">更新</button>
         <button class="btn btn-danger btn-sm" v-if="processing">Processing</button>
     </li>
 </template>
