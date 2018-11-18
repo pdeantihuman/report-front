@@ -1,11 +1,20 @@
 <template>
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <span v-if="!editing">
-            {{ itemKey + ' : ' + itemValue }}
+            {{ itemKey + ' : ' }}
+            <span style="color:red" v-if="hasError">
+                {{ itemValue }}
+            </span>
+            <span v-else>
+                {{ itemValue }}
+            </span>
         </span>
-        <div class="col-4 px-0" v-else><input type="text" class="form-control" :placeholder="itemValue" v-model="input"></div>
-        <button class="btn btn-warning btn-sm" @click="edit" v-if="!editing && !processing">Edit</button>
-        <button class="btn btn-warning btn-sm" @click="update" v-if="editing && !processing">Update</button>
+
+
+        <div class="col-4 px-0" v-else><input type="text" class="form-control" :placeholder="itemValue" v-model="input">
+        </div>
+        <button class="btn btn-warning btn-sm" @click="edit" v-if="!editing && !processing">编辑</button>
+        <button class="btn btn-warning btn-sm" @click="update" v-if="editing && !processing">提交</button>
         <button class="btn btn-danger btn-sm" v-if="processing">Processing</button>
     </li>
 </template>
@@ -18,22 +27,22 @@
                 editing: false,
                 processing: false,
                 itemValue: this.value,
-                input: ''
+                input: '',
+                hasError: false
             }
         },
         props: {
             itemKey: String,
             value: String
         },
-        computed: {
-
-        },
+        computed: {},
         methods: {
             edit() {
                 this.editing = true
+                this.hasError = false
             },
             update() {
-                this.processing=true
+                this.processing = true
                 if (this.input == "") {
                     this.processing = false
                     this.editing = false
@@ -47,10 +56,16 @@
                     this.editing = false
                     this.processing = false
                     this.itemValue = response.data.value
+                    this.$emit('success')
+                }).catch((error) => {
+                    this.$emit('patch_error', error.response.data.errMsg)
+                    this.editing = false
+                    this.processing = false
+                    this.hasError = true
                 })
 
             },
-            translate(key){
+            translate(key) {
                 map = {
                     minimum_alley: '最小的教学楼号',
                     maximum_alley: '最大的教学楼号'

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-alert :key="Math.floor(Math.random()*1000)" v-for="error in errors" show>{{ error }}</b-alert>
         <ul class="list-group p-2">
             <component
                     :is="morphic(environment)"
@@ -7,13 +8,15 @@
                     :key="environment.key"
                     :item-key="environment.key"
                     :value="environment.value"
+                    @patch_error="handle_error"
+                    @success="handle_success"
             ></component>
         </ul>
         <ul class="list-group p-2" v-if="user != null">
             <component
                     is="user-number-item"
                     item-key="负责的楼层"
-                    :value="user.alley"
+                    :value="user.alley+''"
             >
 
             </component>
@@ -32,7 +35,8 @@
         data() {
             return {
                 environments: [],
-                user: null
+                user: null,
+                errors: []
             }
         },
         methods: {
@@ -41,6 +45,14 @@
                     return "number-item";
                 if (environment.type == "boolean")
                     return "boolean-item"
+            },
+            handle_error(event) {
+                this.errors = []
+                this.errors.push(event)
+
+            },
+            handle_success($event){
+                this.errors = []
             }
         },
         mounted() {
