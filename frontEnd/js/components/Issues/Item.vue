@@ -80,7 +80,7 @@
         },
         methods: {
             showModal() {
-                clearInterval()
+                this.$emit('processing')
                 if (this.canUndo){
                     axios.post(this.undoUrl)
                         .then(response => {
@@ -93,9 +93,7 @@
                 }
             },
             hideModal() {
-                setInterval(() => {
-                    location.reload()
-                }, 60000)
+                this.$emit('processed')
                 axios.patch(this.patchUrl)
                     .then(response => {
                         this.isUploading = false
