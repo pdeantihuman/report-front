@@ -3,7 +3,7 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
         {{ itemKey  }}
         <button class="btn btn-success btn-sm" v-if="itemValue=='1' && !processing" @click="toggle">ON</button>
-        <button class="btn btn-black btn-sm" v-if="itemValue=='0' && !processing" @click="toggle">OFF</button>
+        <button class="btn btn-secondary btn-sm" v-if="itemValue=='0' && !processing" @click="toggle">OFF</button>
         <button class="btn-danger btn-sm" v-if="processing">Processing</button>
     </li>
 </template>

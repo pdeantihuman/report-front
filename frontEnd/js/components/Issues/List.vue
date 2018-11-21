@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
             <issue-item
                     v-for="item in list"
                     :key="item.id.toString()"
@@ -9,6 +9,8 @@
                     :description="item.description"
                     :is_open="item.is_open.toString()"
                     :datetime="item.created_at"
+                    @processing="clearReload"
+                    @processed="setReload"
             >
             </issue-item>
             <li class="list-group-item" v-if="list.length != 0">
@@ -35,18 +37,17 @@
                 currentPage: 1,
                 total: 0,
                 user: [],
-                increments: []
+                increments: [],
+                intervalId: -1
             }
         },
         mounted() {
-            axios.get('/api/issues').then((response) => {
+            axios.get('/api/issues?filter=1').then((response) => {
                 this.list = response.data.data
                 this.currentPage = response.data.current_page
                 this.total = response.data.total
             })
-            setInterval(() => {
-                location.reload()
-            }, 60000)
+            this.setReload()
             axios.get('/api/user')
                     .then((response) => {
                         this.user = response.data.data
@@ -54,18 +55,28 @@
         },
         methods: {
             load(event) {
-                let data = {
-                    page: this.currentPage
-                }
                 axios.get('/api/issues?page=' + event)
                     .then((response) => {
                         this.list = response.data.data
                     })
-
-                clearInterval()
-                setInterval(() => {
+                this.clearReload()
+                this.setReload()
+            },
+            setReload() {
+                console.log(this.intervalId)
+                if (this.intervalId != -1)
+                    return;
+                this.intervalId = setInterval(() => {
+                    // this.load(this.currentPage)
                     location.reload()
-                }, 60000)
+                }, 6000)
+            },
+            clearReload() {
+                console.log(this.intervalId)
+                if (this.intervalId == -1)
+                    return;
+                clearInterval(this.intervalId)
+                this.intervalId = -1
             }
         },
         components: {

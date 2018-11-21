@@ -17,7 +17,7 @@ import BootstrapVue from 'bootstrap-vue'
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('issues-list', require('../components/Issues/List'))
+Vue.component('issues-card', require('../components/Issues/IssuesCard'))
 
 Vue.use(BootstrapVue)
 

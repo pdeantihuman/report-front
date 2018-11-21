@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-alert :key="Math.floor(Math.random()*1000)" v-for="error in errors" show>{{ error }}</b-alert>
         <ul class="list-group p-2">
             <component
                     :is="morphic(environment)"
@@ -7,13 +8,33 @@
                     :key="environment.key"
                     :item-key="environment.key"
                     :value="environment.value"
+                    @patch_error="handle_error"
+                    @success="handle_success"
             ></component>
         </ul>
         <ul class="list-group p-2" v-if="user != null">
             <component
                     is="user-number-item"
-                    item-key="负责的楼层"
-                    :value="user.alley"
+                    item-key="负责的教学楼"
+                    :value="user.alleys.toString()"
+                    :url="'/api/user/configuration/alley'"
+                    :data_key="'alleys'"
+            >
+            </component>
+            <component
+                    is="user-number-item"
+                    item-key="微信 open id"
+                    :value="user.openid+''"
+                    :url="'/api/user/configuration/openid'"
+                    :data_key="'openid'"
+            >
+            </component>
+            <component
+                    is="user-button-item"
+                    item_key="发送微信测试推送"
+                    :is_disabled="false"
+                    url="/api/user/configuration/message"
+                    @error="handle_error"
             >
 
             </component>
@@ -26,13 +47,15 @@
     import numberItem from './numberItem'
     import booleanItem from './booleanItem'
     import userNumberItem from './userNumberItem'
+    import userButtonItem from './userButtonItem'
 
     export default {
         name: "list",
         data() {
             return {
                 environments: [],
-                user: null
+                user: null,
+                errors: [],
             }
         },
         methods: {
@@ -41,6 +64,14 @@
                     return "number-item";
                 if (environment.type == "boolean")
                     return "boolean-item"
+            },
+            handle_error(event) {
+                this.errors = []
+                this.errors.push(event)
+
+            },
+            handle_success($event) {
+                this.errors = []
             }
         },
         mounted() {
@@ -54,7 +85,8 @@
         components: {
             'number-item': numberItem,
             'boolean-item': booleanItem,
-            'user-number-item': userNumberItem
+            'user-number-item': userNumberItem,
+            'user-button-item': userButtonItem
         }
     }
 </script>

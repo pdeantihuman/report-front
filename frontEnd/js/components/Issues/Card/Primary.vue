@@ -13,7 +13,7 @@
     export default {
         props: {
             issue_id: String,
-            disabled: Boolean
+            disabled: Boolean,
         },
         data() {
             return {

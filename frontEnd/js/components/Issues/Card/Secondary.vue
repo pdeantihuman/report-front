@@ -4,7 +4,7 @@
             block
             v-if="issue_id != 0"
             :variant="variant"
-            :href="href"
+            @click="$emit('next')"
             >
         下一个
     </b-btn>
