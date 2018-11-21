@@ -18,12 +18,14 @@
                 editing: false,
                 processing: false,
                 itemValue: this.value,
-                input: ''
+                input: '',
             }
         },
         props: {
             itemKey: String,
-            value: String
+            value: String,
+            url: String,
+            data_key: String
         },
         computed: {
 
@@ -39,22 +41,21 @@
                     this.editing = false
                     return;
                 }
-                let data = {
-                    alley: this.input
-                }
-                axios.patch('/api/user/configuration/alley', data).then((response) => {
+                let data = {}
+                data[this.data_key] = this.input
+                axios.patch(this.url, data).then((response) => {
                     this.editing = false
                     this.processing = false
-                    this.itemValue = response.data.alley
+                    this.itemValue = response.data[this.data_key]
                 })
 
             },
-            translate(key){
-                map = {
-                    minimum_alley: '最小的教学楼号',
-                    maximum_alley: '最大的教学楼号'
-                }
-            }
+            // translate(key){
+            //     map = {
+            //         minimum_alley: '最小的教学楼号',
+            //         maximum_alley: '最大的教学楼号'
+            //     }
+            // }
         }
     }
 </script>
