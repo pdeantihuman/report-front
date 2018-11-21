@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
             <issue-item
                     v-for="item in list"
                     :key="item.id.toString()"
@@ -42,7 +42,7 @@
             }
         },
         mounted() {
-            axios.get('/api/issues').then((response) => {
+            axios.get('/api/issues?filter=1').then((response) => {
                 this.list = response.data.data
                 this.currentPage = response.data.current_page
                 this.total = response.data.total
@@ -67,7 +67,8 @@
                 if (this.intervalId != -1)
                     return;
                 this.intervalId = setInterval(() => {
-                    this.load(this.currentPage)
+                    // this.load(this.currentPage)
+                    location.reload()
                 }, 6000)
             },
             clearReload() {
